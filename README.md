@@ -4,7 +4,7 @@
 ![](https://img.shields.io/npm/v/visual-insights?color=blue)
 [![Coverage Status](https://coveralls.io/repos/github/Kanaries/visual-insights/badge.svg?branch=master)](https://coveralls.io/github/Kanaries/visual-insights?branch=master)
 
-Visual-Insights is an automated data analysis and visualization recommandation pipeline tool.
+Visual-Insights is an automated data analysis and visualization recommendation pipeline tool.
 
 ### API
 

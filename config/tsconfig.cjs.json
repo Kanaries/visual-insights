@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "moduleResolution": "node",
+    "declaration": true,
+    "downlevelIteration": true
+  },
+  "include": [
+    "../src/**/*"
+  ]
+}

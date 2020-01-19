@@ -1,4 +1,7 @@
 src
 node_modules
 test
+config
 README.md
+
+.travis.yml
