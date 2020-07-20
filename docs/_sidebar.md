@@ -1,14 +1,5 @@
-+ Introduction
-+ Tutorial
-+ API
-  + DashBoard
-  + Sampling
-  + Utils
-  + Statistics
-  + UnivariateSummary
-  + Distribution
-  + specification
-  + Cleaner
-  + Insight
-  + Cluster
-+ Related Works
+- Tutorial
+    - [basic](./tutorial/basic.md)
+- API 
+    - [VisualInsights](./API/main.md)
+    - [Engine](./API/engine.md)

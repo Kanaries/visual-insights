@@ -32,6 +32,10 @@ function isFieldNumeric(dataSource: DataSource, fieldName: string): boolean {
 
 function isFieldTime(dataSource: DataSource, fieldName: string): boolean {
   return dataSource.every(record => {
+    // todo: tmp solotion here.
+    if (Number(record[fieldName]) >= 1800 && Number(record[fieldName]) <= 2200) {
+      return true;
+    }
     return (!isNaN(Date.parse(record[fieldName]))
     && typeof record[fieldName] === 'string'
     && /^[0-9]{0,4}[-/][0-9]{0,2}([-/][0-9]{0,2}$)?/.test(record[fieldName]))
@@ -209,6 +213,20 @@ function DKL (p1List: number[], p2List: number[]): number {
   return sum;
 }
 
+function isFieldUnique (dataSource: DataSource, field: string): boolean {
+  let set = new Set<any>();
+  let validCount = 0;
+  let len = dataSource.length;
+  for (let i = 0; i < len; i++) {
+    if (dataSource[i][field] !== undefined && dataSource[i][field] !== null && dataSource[i][field] !== '') {
+      validCount++;
+      set.add(dataSource[i][field]);
+    }
+  }
+  if (set.size === validCount) return true;
+  return false;
+}
+
 export {
   deepcopy,
   memberCount,
@@ -220,6 +238,7 @@ export {
   isFieldTime,
   isFieldNumeric,
   JOIN_SYMBOL,
-  DKL
+  DKL,
+  isFieldUnique
 }
 
