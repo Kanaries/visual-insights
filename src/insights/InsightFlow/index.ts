@@ -1,13 +1,7 @@
 import { Record } from "../../commonTypes";
 import { IField, FieldDictonary, IFieldSummary, IInsightSpace, InsightWorker } from "./interfaces";
-import { getFieldsSummary } from "./fieldSummary";
-import { DataGraph } from "./dataGraph";
-import { Cube } from "../../cube";
-import { StatFuncName, getCombination, normalize, linearMapPositive, entropy } from "../../statistics";
-import { CHANNEL } from "../../constant";
-import { InsightWorkerCollection } from "./workerCollection";
 import { VIEngine } from './engine';
-import assert from 'assert';
+const assert = require('assert');
 
 interface VIProps {
     dataSource: Record[];

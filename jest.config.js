@@ -7,7 +7,7 @@ module.exports = {
     },
   },
   browser: false,
-  testPathIgnorePatterns: ['/node_modules/', 'test/', 'build/'],
+  testPathIgnorePatterns: ['/node_modules/', 'test/', '/build/'],
   collectCoverage: false,
   collectCoverageFrom: ['src/**/*.ts'],
 }

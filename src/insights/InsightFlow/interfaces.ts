@@ -1,5 +1,4 @@
 import { Record } from '../../commonTypes';
-import { VisualInsights } from './index';
 import { VIEngine } from './engine';
 export type ISemanticType = 'quantitative' | 'nominal' | 'ordinal' | 'temporal';
 export type IDataType = 'number' | 'integer' | 'boolean' | 'date' | 'string';

@@ -106,11 +106,12 @@ import { Cuboid } from "./cuboid";
 // // case: 第一个请求的cuboid是明细粒度，则
 
 const CUBOID_KEY_SPLITOR = '_join_';
+const DEFAULT_OPS: StatFuncName[] = ["max", "min", "sum", "mean", "count"];
 interface ICube {
     dimensions: string[];
     measures: string[];
     dataSource: Record[];
-    ops: StatFuncName[];
+    ops?: StatFuncName[];
 }
 export class Cube implements ICube {
     public dimensions: string[];
@@ -120,7 +121,7 @@ export class Cube implements ICube {
     private cuboids: Map<string, Cuboid>;
     private dimOrder: Map<string, number>;
     public constructor (props: ICube) {
-        const { dimensions, measures, dataSource, ops } = props;
+        const { dimensions, measures, dataSource, ops = DEFAULT_OPS } = props;
         this.dimensions = dimensions;
         this.measures = measures;
         this.dataSource = dataSource;
@@ -186,7 +187,8 @@ export class Cube implements ICube {
           measures: this.measures,
           ops: this.ops,
         })
-        cuboid.setData(parentCuboid.state);
+        // cuboid.setData(parentCuboid.state);
+        cuboid.computeFromCuboid(parentCuboid);
         return cuboid;
     }
     public buildBaseCuboid(): Cuboid {
