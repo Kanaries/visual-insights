@@ -99,10 +99,14 @@ export function stdAggregateFromCuboid(props: ISTDAggregateProps): Record[] {
         const aggs: Record = {};
         measures.forEach((mea, meaIndex) => {
             aggs[mea] = {};
-            ops.forEach((op) => {
+            // TODO: need a formal solution for distributive\algebraic\holistic aggregators.
+            ops.filter(op => !(['sum', 'count', 'mean'].includes(op))).forEach((op) => {
                 const opFunc = getAggregator(op);
                 aggs[mea][op] = opFunc(group.map((r) => r[mea][op]));
             });
+            aggs[mea]["sum"] = getAggregator("sum")(group.map((r) => r[mea]["sum"]));
+            aggs[mea]["count"] = getAggregator("sum")(group.map((r) => r[mea]['count']));
+            aggs[mea]["mean"] = aggs[mea]['sum'] / aggs[mea]['count'];
         });
         const dimValues = key.split(SPLITOR);
         dimensions.forEach((dim, dimIndex) => {

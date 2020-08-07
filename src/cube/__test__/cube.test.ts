@@ -28,12 +28,12 @@ test('cube', () => {
     // let t1 = new Date().getTime();
     // console.log('cube', t1 - t0)
     // t0 = new Date().getTime()
-    simpleAggregate({
-      dataSource,
-      dimensions,
-      measures,
-      ops: measures.map(() => 'sum'),
-    })
+    // simpleAggregate({
+    //   dataSource,
+    //   dimensions,
+    //   measures,
+    //   ops: measures.map(() => 'sum'),
+    // })
     const Aggs1Expected = simpleAggregate({
       dataSource,
       dimensions: ['PClass', 'Sex', 'Embarked'],
@@ -54,3 +54,49 @@ test('cube', () => {
     expect(Aggs1).toEqual(Aggs1Expected);
     expect(Aggs2).toEqual(Aggs2Expected)
 })
+
+test("cube:more aggregators", () => {
+    const cube = new Cube({
+        dataSource,
+        dimensions,
+        measures
+    });
+    cube.buildBaseCuboid();
+    const Aggs1 = cube.getCuboid(["PClass", "Sex", "Embarked"]).getState(
+        measures,
+        measures.map(() => "mean")
+    );
+
+    const Aggs1Expected = simpleAggregate({
+        dataSource,
+        dimensions: ["PClass", "Sex", "Embarked"],
+        measures,
+        ops: measures.map(() => "mean"),
+    });
+
+    expect(Aggs1.length > 0).toBe(true);
+    expect(Aggs1).toEqual(Aggs1Expected);
+});
+
+test("cube:more aggregators", () => {
+    const cube = new Cube({
+        dataSource,
+        dimensions,
+        measures,
+    });
+    cube.buildBaseCuboid();
+    const Aggs1 = cube.getCuboid(["PClass", "Sex", "Embarked"]).getState(
+        measures,
+        measures.map(() => "count")
+    );
+
+    const Aggs1Expected = simpleAggregate({
+        dataSource,
+        dimensions: ["PClass", "Sex", "Embarked"],
+        measures,
+        ops: measures.map(() => "count"),
+    });
+
+    expect(Aggs1.length > 0).toBe(true);
+    expect(Aggs1).toEqual(Aggs1Expected);
+});
