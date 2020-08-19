@@ -1,5 +1,6 @@
 import { NormalizedRecord, DataSource, Record } from "../../commonTypes";
 import { uniformSampling } from "../../sampling";
+import { EULER } from "../../constant";
 interface ITree {
   field: string;
   value: number;
@@ -121,7 +122,7 @@ export class IsolationForest {
    * @param Psi 
    */
   public AFS(Psi: number): number {
-    if (Psi > 2) return 2 * (Math.log(Psi - 1) + Math.E) - 2 * (Psi - 1) / Psi;
+    if (Psi > 2) return 2 * (Math.log(Psi - 1) + EULER) - 2 * (Psi - 1) / Psi;
     if (Psi === 2) return 1;
     return 0;
   }
