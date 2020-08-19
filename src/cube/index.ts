@@ -165,7 +165,7 @@ export class Cube implements ICube {
                 }
             }
         }
-        let minCost = this.dataSource.length;
+        let minCost = Infinity;
         let minCuboidKey = this.dimensions.join(CUBOID_KEY_SPLITOR);
         if (existingParentKeys.length > 0) {
             for (let key of existingParentKeys) {
@@ -189,6 +189,7 @@ export class Cube implements ICube {
         })
         // cuboid.setData(parentCuboid.state);
         cuboid.computeFromCuboid(parentCuboid);
+        this.cuboids.set(dimKey, cuboid);
         return cuboid;
     }
     public buildBaseCuboid(): Cuboid {
