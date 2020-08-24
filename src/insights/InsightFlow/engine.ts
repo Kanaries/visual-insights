@@ -28,6 +28,7 @@ export class VIEngine {
     public workerCollection: InsightWorkerCollection;
     public subSpaces: ViewSpace[];
     public insightSpaces: IInsightSpace[];
+    public aggregators: StatFuncName[];
     /**
     * number of dimensions appears in a view.
     */
@@ -44,6 +45,7 @@ export class VIEngine {
     };
     public constructor() {
         this.cube = null;
+        this.aggregators = ["max", "min", "sum", "mean", "count"];
         this.workerCollection = InsightWorkerCollection.init();
     }
     public setDataSource(dataSource: Record[]) {
@@ -122,13 +124,12 @@ export class VIEngine {
         return this;
     }
     public buildCube() {
-        const { measures, dataSource, dataGraph, dimensions } = this;
-        const ops: StatFuncName[] = measures.map((m) => "sum");
+        const { measures, dataSource, dataGraph, dimensions, aggregators } = this;
         const cube = new Cube({
             dimensions,
             measures,
             dataSource,
-            ops,
+            ops: aggregators,
         });
         cube.buildBaseCuboid();
         dataGraph.DClusters.forEach((group) => {
