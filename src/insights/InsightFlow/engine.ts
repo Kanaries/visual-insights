@@ -151,6 +151,10 @@ export class VIEngine {
         }
         return fieldSets;
     }
+    // 以度量为核心，找该度量在哪些维度的拆分研究下最优的问题
+    // 1. 有序的拆分（推荐拆分顺序）-> 决策树
+    // 2. 无序的拆分，直接求最小拆分粒度的划分效果（先做这个）
+    //      + 
     public buildSubspaces(
         DIMENSION_NUM_IN_VIEW: ConstRange = this.DIMENSION_NUM_IN_VIEW,
         MEASURE_NUM_IN_VIEW: ConstRange = this.MEASURE_NUM_IN_VIEW
